@@ -15,7 +15,7 @@ const UserController = {
         const { id } = req.params;
         dbConnection
           .query(`SELECT *
-          FROM "users" WHERE id=${id}`)
+          FROM "users" WHERE user_id=${id}`)
           .then((data) => {
               return res.json(data.rows);
           })
