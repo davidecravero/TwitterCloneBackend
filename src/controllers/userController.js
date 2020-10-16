@@ -3,11 +3,23 @@ const dbConnection = require('../dbConfig');
 const UserController = {
 
     getAll: (req, res, next) => {
-        res.send('All users');
+        dbConnection
+          .query(`SELECT *
+          FROM "users"`)
+          .then((data) => {
+              return res.json(data.rows);
+          })
+          .catch((e) => console.log(e));
     },
     getById: (req, res, next) => {
         const { id } = req.params;
-        res.send(`User with id ${id}`);
+        dbConnection
+          .query(`SELECT *
+          FROM "users" WHERE id=${id}`)
+          .then((data) => {
+              return res.json(data.rows);
+          })
+          .catch((e) => console.log(e));
     },
     getMessagesById: (req, res, next) => {
         const { id } = req.params;+
