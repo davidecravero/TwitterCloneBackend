@@ -22,8 +22,14 @@ const UserController = {
           .catch((e) => console.log(e));
     },
     getMessagesById: (req, res, next) => {
-        const { id } = req.params;+
-        res.send(`All messages by user ${id}`);
+        const { id } = req.params;
+        dbConnection
+          .query(`SELECT *
+          FROM "tweets" WHERE user_id=${id}`)
+          .then((data) => {
+              return res.json(data.rows);
+          })
+          .catch((e) => console.log(e));
     },
 };
 
